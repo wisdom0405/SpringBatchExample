@@ -62,6 +62,7 @@ public class FirstBatch {
         return new StepBuilder("firstStep", jobRepository)
                 // chunk : 읽기 -> 처리 -> 쓰기 작업은 청크 단위로 진행되는데, 대량의 데이터를 얼만큼 끊어서 처리할지에 대한 값으로 적당한 값을 선정해야 한다.
                 // 너무 작으면 I/O 처리가 많아지고 오버헤드 발생, 너무 크면 적재 및 자원 사용에 대한 비용과 실패 부담이 커짐
+                // <Reader가 읽어오는 데이터타입, Writer가 쓰는 데이터 타입>
                 .<BeforeEntity, AfterEntity> chunk(10, platformTransactionManager)
                 .reader(beforeReader())
                 .processor(middleProcessor())
